@@ -23,11 +23,11 @@ app.use('/api', authRoute);
 app.use(errorMiddleware);
 
 const DB_URL = process.env.DB_URL;
-const PORT = 8080;
+const PORT = process.env.PORT || 4000;
 
 const bootstrap = async () => {
     try {
-        await mongoose.connect(DB_URL).then(() => console.log("Connected DB"));
+        await mongoose.connect(DB_URL);
         app.listen(PORT, () => console.log(`Listening on - http://localhost:${PORT}`));
     } catch (error) {
         console.error("Error connecting with DB:", error);
